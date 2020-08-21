@@ -26,10 +26,33 @@ const getBookmarks = function() {
   return listApiFetch(`${BASE_URL}/bookmarks`);
 };
 
-//createBookmark
-//updateBookmark
-//deleteBookmark
+const createBookmark = function (bkmkData) {
+  const newBkmk = bkmkData;
+  return listApiFetch(`${BASE_URL}/bookmarks`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: newBkmk
+  });
+};
+
+const updateBookmark = function (id, updateData) {
+  const newData = updateData;
+  return listApiFetch(`${BASE_URL}/bookmarks/${id}`, {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: newData
+  });
+};
+
+const deleteBookmark = function (id) {
+  return listApiFetch(`${BASE_URL}/bookmarks/${id}`,
+  {method: 'DELETE'});
+};
+
 
 export default {
   getBookmarks,
+  createBookmark,
+  updateBookmark,
+  deleteBookmark
 };

@@ -1,38 +1,39 @@
 const lib = {
-  bookmarks: [ {
-    id:1,
-    title:'Test',
-    url:'www.test.com',
-    desc:'test',
-    rating:'5',
-    expanded: false
-  },
-  {
-    id:2,
-    title:'Test2',
-    url:'www.test2.org',
-    desc:'yet another test',
-    rating:'3',
-    expanded: false
-  }
-],
+  bookmarks: [],
   submitting: false,
   filterLevel: 1,
   error: {}
 };
 
-//findbyid
+const findById = function (id) {
+  return this.lib.bookmarks.find(current => current.id === id);
+};
 
-//addbookmark
+const addBookmark = function (bookmark) {
+  this.lib.bookmarks.push(bookmark);
+  console.log('addBookmark ran and the bookmarks array is currently: ' + lib.bookmarks);
+};
 
-//findanddelete
+const findAndDeleteBookmark = function (id) {
+  this.lib.bookmarks = this.lib.bookmarks.filter(bookmark => bookmark.id !== id);
+};
 
 //toggleexpanded
 
 //findandupdate
+const findAndUpdateBookmark = function (id, newData) {
+  const foundBookmark = this.findById(id);
+  Object.assign(foundBookmark, newData);
+};
+
+//setError
 
 
 
 export default {
-  lib
+  lib,
+  findById,
+  addBookmark,
+  findAndDeleteBookmark,
+  findAndUpdateBookmark
 };
