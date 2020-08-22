@@ -2,12 +2,15 @@
     border-color: whitesmoke;
 }
 
+header {
+    text-align: center;
+}
+
 ul {
     list-style: none;
     padding: 0;
     width: 100%;
 }
-
 
 body {
     display:flex;
@@ -29,6 +32,7 @@ span {
 
 main {
     width: 65vw;
+    max-width: 800px;
 }
 
 input {
@@ -38,7 +42,7 @@ input {
 .container {
     display: flex;
     justify-content: center;
-    flex-direction: wrap;
+    flex-direction: column;
     background-color: rgb(240, 240, 134);
 
 }

@@ -18,17 +18,10 @@ const findAndDeleteBookmark = function (id) {
   this.lib.bookmarks = this.lib.bookmarks.filter(bookmark => bookmark.id !== id);
 };
 
-//toggleexpanded
-
-//findandupdate
 const findAndUpdateBookmark = function (id, newData) {
   const foundBookmark = this.findById(id);
   Object.assign(foundBookmark, newData);
 };
-
-//setError
-
-
 
 export default {
   lib,
