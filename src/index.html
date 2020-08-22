@@ -16,33 +16,41 @@
         </header>
 
         <main>
+           
             <div class="box">
-                <form class="bookmark-entry">
-                    <label for="title-entry">Title of Site</label>
+                <button type="submit" id="add-new-link">Add New Link</button>
+                <form class="bookmark-entry hidden">
+                    <span>
+                        <label for="title-entry">Title of Site</label>
                         <input type="text" name="title-entry" id="title-entry">
-                        <br>
+                    </span>
+                    <span>
                     <label for="url-entry">Url Entry</label>
                         <input type="text" name="url-entry" id="url-entry">
-                        <br>
+                    </span>                    
+                    <span>
                     <label for="desc-entry">Description</label>
                         <input type="text" name="desc-entry" id="desc-entry">
-                        <br>
+                    </span>
+                    <span>
                     <label for="rating-entry">Rating out of 5</label>
-                        <input type="number" name="rating-entry" id="rating-entry">
-                        <br>
-                    <button type="submit">Submit</button>
+                        <input type="number" name="rating-entry" id="rating-entry" min="1" max="5">
+                    </span>
+                    <span><button type="submit" id="submit">Submit</button><button type="submit" id="cancel-submit">Cancel</button></span>
                 </form>
             </div> 
-            
-            <div class="box">
-                
-                <ul class="container list-container" id="target">
+            <ul class="container list-container" id="target">
 
-                </ul>
+            </ul>
+           
+            
+                
                
-            </div>
         </main>
 
     </div>
 </body>
 </html>
+
+
+

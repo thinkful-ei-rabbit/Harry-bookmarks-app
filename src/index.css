@@ -4,7 +4,10 @@
 
 ul {
     list-style: none;
+    padding: 0;
+    width: 100%;
 }
+
 
 body {
     display:flex;
@@ -18,26 +21,26 @@ body {
     font-family: sans-serif;
 }
 
-.item {
-    min-width: 100px;
-    min-height: 100px;
-    background-color: lightgreen;
+
+span {
+    display: block;
+    margin-bottom: 5px;
 }
 
-.grid-container {
-    display:grid;
-    grid-template-columns: 150px 150px 150px;
-    grid-template-rows: 150px 150px;
-    grid-gap: 1rem;
+main {
+    width: 65vw;
+}
+
+input {
+    width: 97%;
 }
 
 .container {
-    display: block;
+    display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: wrap;
     background-color: rgb(240, 240, 134);
 
-    
 }
 
 .box {
@@ -45,12 +48,18 @@ body {
     flex-direction: column;
     border: 5px;
     border-style: solid;
-    margin: 20px;
-    padding: 20px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.box-horizontal {
+    flex-direction: wrap;
+    float: left;
+
 }
 
 .bookmark {
-    margin: 0;
+    margin: 5px;
     border: 1px;
     border-style: dashed;
 }

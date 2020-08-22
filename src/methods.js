@@ -4,48 +4,34 @@ import store from './store';
 import api from './api';
 
 const generateBookmarkHtmlSnippet = function (bookmark) {
-  //function to generate the an individual bookmark html
-//create a variable to store the return
-//should check if the expanded view value is true and generate the larger description
-//otherwise generate the smaller view
-//dont forget to sets data-item-id for the li equal to the id
-//returns html string
+
   
   console.log('generateBookmarkHtmlSnippet ran');
 
   let htmlSnippet = `
-  <li class="bookmark" data-item-id="${bookmark.id}">
-  <div class="box">
-  <span>${bookmark.title}</span><br>
-  <span>${bookmark.url}</span><br>
-  <span>${bookmark.desc}</span><br>
-  <span>${bookmark.rating}</span><br>
-  <section class="box">
-  <button class="bookmark-expand">
-    <span class="button-label">expand</span>
-  </button>
-  <button class="bookmark-delete">
-    <span class="button-label">delete</span>
-  </button>
-  </section>
-  </div>
-  </li>`;
-  
-  //console.log(htmlSnippet);
-
+        <li class="bookmark" data-item-id="${bookmark.id}">
+              <div class="box">
+                  <span>${bookmark.rating}</span>
+                  <h3>${bookmark.title}</h3>
+                  <div class="truncated">
+                    <button class="bookmark-expand">---expand/collapse---</button>
+                     <div class="extra-info hidden">
+                        <span>${bookmark.url}</span><br>
+                        <span>${bookmark.desc}</span><br>
+                     <div>
+                      <a href="${bookmark.url}"><button class="visit-link">visit</button></a>
+                      <button class="bookmark-delete">delete</button>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+            </li>`; 
   return htmlSnippet;
-
 };
 
 
 
 const createBookmarksString = function (bookmarksArr) {
-
-//function to put the bookmarks together into the full list
-//take an array and map each item to a new array of the html snippets
-//join them
-//returns the full html of the list
-
   console.log('createBookmarkString ran taking the argument', bookmarksArr);
   const bookmarksString = bookmarksArr.map((bookmark) => {
     return generateBookmarkHtmlSnippet(bookmark);
@@ -69,26 +55,25 @@ const createBookmarksString = function (bookmarksArr) {
 //rendererror function
 
 const handleDeleteButton = function () {
+  $('.list-container').on('click', '.bookmark-delete', event => {
+    const id = getId(event.currentTarget);
+    console.log('found id: ' + id);
+    api.deleteBookmark(id)
+      .then(() => {
+        store.findAndDeleteBookmark(id);
+        render();
+      }).catch(error => {
+        //add error functionality here
+        render();
+      });
+  });
+};
 
-//handle delete
-//listen for delete button and grab the bkmrk id
-//call api delete function, then delete from the store
-//re render
-//catch any errors/console log them, and render error function
-
-$('.list-container').on('click', '.bookmark-delete', event => {
-  const id = getId(event.currentTarget);
-  console.log('found id: ' + id);
-  api.deleteBookmark(id)
-    .then(() => {
-      store.findAndDeleteBookmark(id);
-      render();
-    }).catch(error => {
-      //add error functionality here
-      render();
-    });
-});
-
+const handleBookmarkExpand = function () {
+  $('.list-container').on('click','.bookmark-expand', event => {
+    console.log('EXPANDED RAN');
+    $(event.currentTarget).siblings('.extra-info').toggleClass('hidden');
+  });
 };
 
 //handle expand button
@@ -137,12 +122,15 @@ const handleSubmit = function () {
     const rating = $(event.currentTarget).find('#rating-entry').val();
     $('#rating-entry').val('');
     console.log(id,title,url,desc,rating);
-    const bookmarkObj = { title, url, desc, rating };
+
+    const bookmarkObj = { title, url, desc, rating, expanded:false};
     console.log(bookmarkObj);
+
     const bookmarkJson = JSON.stringify(bookmarkObj);
     api.createBookmark(bookmarkJson)
       .then(newBookmark => {
         store.addBookmark(newBookmark);
+        toggleNewLinkSubmit();
         render();
       }).catch(error => {
         //error functionality here
@@ -150,10 +138,6 @@ const handleSubmit = function () {
       })
   })
 };
-//handle new bookmark submit
-//listen for 
-//triggers a boolean in the store
-//re renders
 
 const getId = function (target) {
   
@@ -161,16 +145,32 @@ const getId = function (target) {
     .closest('.bookmark')
     .data('item-id');
 };
-//insert the html into the dom
 
-// function handleClicks () {
-//   $('main').closest('div').on('click', () => console.log(event.currentTarget));
-// };
+const handleNewLinkButton = function () {
+  $('main').on('click', '#add-new-link', event => {
+    console.log('handleNewLinkButton ran');
+    toggleNewLinkSubmit();
+    store.lib.submitting = true;
+  });
+};
 
-//bind eventlisteners function that runs all the handlers in this file
+const handleCancelSubmit = function () {
+  $('#cancel-submit').on('click', event => toggleNewLinkSubmit());
+};
+
+const toggleNewLinkSubmit = function() {
+  $('form.bookmark-entry').toggleClass('hidden');
+  $('#add-new-link').toggleClass('hidden');
+};
+
+
 const bindEventListeners = function() {
   handleSubmit();
   handleDeleteButton();
+  handleNewLinkButton();
+  handleCancelSubmit();
+  handleBookmarkExpand();
+  handleBookmarkCollapse();
 };
 
 //export the render and bindeventlisteners functino
