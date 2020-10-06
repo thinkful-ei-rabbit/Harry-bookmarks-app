@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import './index.css';
 
-import api from './api';
-import store from './store';
-import methods from './methods';
+import api from './scripts/api';
+import store from './scripts/store';
+import methods from './scripts/methods';
 
 function main () {
  

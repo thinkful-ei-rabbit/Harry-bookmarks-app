@@ -1,12 +1,12 @@
 const lib = {
   bookmarks: [],
   submitting: false,
-  filterLevel: 1,
+  filterLevel: 0,
   error: { message: '' }
 };
 
 const findById = function (id) {
-  return this.lib.bookmarks.find(current => current.id === id);
+  return this.lib.bookmarks.find(bookmark => bookmark.id === id);
 };
 
 const addBookmark = function (bookmark) {
