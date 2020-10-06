@@ -52,7 +52,6 @@ const handleDeleteButton = function () {
 
 const handleBookmarkExpand = function () {
   $('.list-container').on('click','.bookmark-expand', event => {
-    console.log('EXPANDED RAN');
     $(event.currentTarget).siblings('.extra-info').toggleClass('hidden');
   });
 };
@@ -141,6 +140,7 @@ const handleCancelSubmit = function () {
 };
 
 const toggleNewLinkSubmit = function() {
+  store.lib.error = { message: '' };
   $('form.bookmark-entry').toggleClass('hidden');
   $('#add-new-link').toggleClass('hidden');
   render();
