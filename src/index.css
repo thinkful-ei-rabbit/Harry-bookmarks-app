@@ -24,6 +24,10 @@ body {
     font-family: sans-serif;
 }
 
+.error-container {
+    color: lightcoral;
+    font-size: medium;
+}
 
 span {
     display: block;

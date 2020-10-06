@@ -2,7 +2,7 @@ const lib = {
   bookmarks: [],
   submitting: false,
   filterLevel: 1,
-  error: {}
+  error: { message: '' }
 };
 
 const findById = function (id) {

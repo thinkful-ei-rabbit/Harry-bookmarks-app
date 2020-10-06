@@ -1,5 +1,4 @@
 import $ from 'jquery';
-
 import store from './store';
 import api from './api';
 
@@ -74,7 +73,16 @@ const render = function () {
   const bookmarks = [...store.lib.bookmarks];
   console.log('bookmarks imported as ' + bookmarks);
   const bookmarksString = createBookmarksString(bookmarks);
-  //console.log('bookmarks string created as ' + bookmarksString);
+
+  if(store.lib.error.message.length > 0) {
+    let errorString = `<h3>${store.lib.error.message}</h3>`;
+    store.lib.error = { message: '' };
+    $('.error-container').html(errorString);
+    // errorString = '';
+  } else {
+    $('.error-container').html('');
+  }
+
   $('#target').html(bookmarksString);
   console.log('html inserted at #target');
 };
@@ -105,6 +113,7 @@ const handleSubmit = function () {
         render();
       }).catch(error => {
         console.log(error.message);
+        store.lib.error = error;
         render();
       });
   });
@@ -127,11 +136,14 @@ const handleNewLinkButton = function () {
 
 const handleCancelSubmit = function () {
   $('#cancel-submit').on('click', event => toggleNewLinkSubmit());
+  store.lib.error = { message: '' };
+  render();
 };
 
 const toggleNewLinkSubmit = function() {
   $('form.bookmark-entry').toggleClass('hidden');
   $('#add-new-link').toggleClass('hidden');
+  render();
 };
 
 const bindEventListeners = function() {
