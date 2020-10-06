@@ -2,6 +2,12 @@
 
 This is a demonstration app to utilize some basic asynchronous functionality in Javascript.  After 24 hours data will be purged, but until then B00kMaRKr will record a list of favorite web URLs along with ratings and descriptions.
 
+## Built By
+
+Harry Winkler
+
+### Live App:
+https://thinkful-ei-rabbit.github.io/Harry-bookmarks-app/dist/index.html
 
 ## USER STORIES
 
