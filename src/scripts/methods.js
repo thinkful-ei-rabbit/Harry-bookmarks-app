@@ -37,7 +37,7 @@ const handleBookmarkExpand = function () {
 
 const handleFilterChoice = function () {
   $('#target').on('change', '#filter-selection', event => {
-    store.lib.filterLevel = $(event.currentTarget).val();
+    store.lib.filterLevel = $(event.currentTarget).val().parseInt();
     render();  
   });
 };
