@@ -1,7 +1,3 @@
-* {
-    border-color: whitesmoke;
-}
-
 header {
     text-align: center;
 }
@@ -14,6 +10,7 @@ ul {
 
 body {
     display:flex;
+    padding-top: 10%;
     flex-direction: column;
     border: 5px;
     border-style: solid;
@@ -26,6 +23,11 @@ body {
 
 .error-container {
     color: lightcoral;
+    background-color: lightpink;
+    margin: 15px 5px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
     font-size: medium;
 }
 
@@ -48,7 +50,7 @@ input {
     justify-content: center;
     flex-direction: column;
     background-color: rgb(240, 240, 134);
-
+    
 }
 
 .box {

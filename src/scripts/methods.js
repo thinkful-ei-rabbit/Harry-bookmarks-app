@@ -37,7 +37,7 @@ const handleBookmarkExpand = function () {
 
 const handleFilterChoice = function () {
   $('#target').on('change', '#filter-selection', event => {
-    store.lib.filterLevel = $(event.currentTarget).val().parseInt();
+    store.lib.filterLevel = Number($(event.currentTarget).val());
     render();  
   });
 };
@@ -93,7 +93,6 @@ const handleCancelSubmit = function () {
 };
 
 const render = function () {
-  console.log('render ran');
   const bookmarks = [ ...store.lib.bookmarks ];
   let htmlToInject = '';
   if (store.lib.error.message !== '') {
@@ -104,12 +103,9 @@ const render = function () {
   if(store.lib.submitting === true) {
     htmlToInject += builders.createSubmitHtml();
   }
-  
   htmlToInject += createBookmarksString(bookmarks);
-
   $('#target').html(htmlToInject);
 };
-
 
 const bindEventListeners = function() {
   handleSubmit();

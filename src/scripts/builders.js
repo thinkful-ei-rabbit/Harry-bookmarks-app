@@ -10,7 +10,8 @@ const createFilterHtml = function () {
   return`<div class="box">
           <h3>Filter:</h3>
           <select name="filter" id="filter-selection">
-            <option value="0">Show everything</option>
+            <option value="0"> ---- </option>
+            <option value="1">Show everything</option>
             <option value="2">Nothing below 2</option>
             <option value="3">Nothing below 3</option>
             <option value="4">Nothing below 4</option>
